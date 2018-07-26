@@ -10,7 +10,21 @@ import { MakeService } from '../services/make.service';
 })
 export class VehicleHomeComponent implements OnInit {
 
+  // filter: {
+  //   sortBy: string,
+  //   isSortAscending: boolean
+  // } = {
+  //   isSortAscending: false,
+  //     sortBy: 'make'
+  //   };
   filter: any = {};
+  columns = [
+    { title: 'Id' },
+    { title: 'Make', key: 'make', isSortable: true },
+    { title: 'Model', key: 'model', isSortable: true },
+    { title: 'Contact Name', key: 'contactName', isSortable: true },
+    { title: '' }
+  ];
   vehicles: Vehicle[];
   allvehicles: Vehicle[];
   makes: KeyValuePairResource[];
@@ -39,6 +53,21 @@ export class VehicleHomeComponent implements OnInit {
   onResetClick() {
     this.filter = {};
     this.onFilterChange();
+  }
+
+  sortByName(columnName) {
+    console.log(this.filter.sortBy);
+    if (this.filter.sortBy === columnName) {
+      console.log(1);
+      // this.filter.sortBy = columnName;
+      this.filter.isSortAscending = !this.filter.isSortAscending;
+    }
+    else {
+      console.log(2);
+      this.filter.sortBy = columnName;
+      this.filter.isSortAscending = true;
+    }
+    this.populateVehicles();
   }
 
 }
