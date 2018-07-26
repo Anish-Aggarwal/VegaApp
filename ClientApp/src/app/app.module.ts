@@ -15,6 +15,7 @@ import { MakeService } from './services/make.service';
 import { FeatureService } from './services/feature.service';
 import { VehicleService } from './services/vehicle.service';
 import { AppErrorHandler } from './app.error-handler';
+import { VehicleHomeComponent } from './vehicle-home/vehicle-home.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { AppErrorHandler } from './app.error-handler';
     HomeComponent,
     CounterComponent,
     FetchDataComponent,
-    VehicleFormComponent
+    VehicleFormComponent,
+    VehicleHomeComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -31,7 +33,8 @@ import { AppErrorHandler } from './app.error-handler';
     FormsModule,
     ToastyModule.forRoot(),
     RouterModule.forRoot([
-      { path: '', component: HomeComponent, pathMatch: 'full' },
+      { path: '',redirectTo:'vehicles', pathMatch: 'full' },
+      { path: 'vehicles', component: VehicleHomeComponent, pathMatch:'full' },
       { path: 'vehicles/new', component: VehicleFormComponent },
       { path: 'vehicles/:id', component: VehicleFormComponent },
       { path: 'counter', component: CounterComponent },
