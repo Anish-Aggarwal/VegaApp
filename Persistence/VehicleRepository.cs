@@ -65,6 +65,8 @@ namespace VegaApp.Persistence
 
             query = query.ApplyOrdering<Vehicle>(queryObj, dictMap);
 
+            // query = query.ApplyPaging<Vehicle>(queryObj);
+
             return await query.ToListAsync();
         }
     }

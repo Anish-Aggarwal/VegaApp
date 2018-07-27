@@ -9,30 +9,27 @@
       <option *ngFor="let m of makes" value="{{m.id}}">{{m.name}}</option>
     </select>
   </div>
-  <button class="btn btn-primary" (click)="onResetClick()" >Reset</button>  
+  <button class="btn btn-primary" (click)="onResetClick()">Reset</button>
 </div>
 
 <table class="table">
   <thead>
     <tr>
       <th scope="col" *ngFor="let c of columns">
-      <div *ngIf="c.isSortable" (click)="sortByName(c.key)">
+        <div *ngIf="c.isSortable" (click)="sortByName(c.key)">
           {{c.title}}
-          <i *ngIf="filter.sortBy===c.key" class="fa" 
-          [class.fa-sort-asc]="filter.isSortAscending"
-          [class.fa-sort-desc]="!filter.isSortAscending"
-          ></i>
+          <i *ngIf="filter.sortBy===c.key" class="fa" [class.fa-sort-asc]="filter.isSortAscending" [class.fa-sort-desc]="!filter.isSortAscending"></i>
         </div>
         <div *ngIf="!c.isSortable">
           {{c.title}}
         </div>
-      </th>      
+      </th>
     </tr>
   </thead>
   <tbody>
     <tr *ngFor="let v of vehicles">
       <td>{{v.id}}</td>
-      <td >{{v.make.name}}</td>
+      <td>{{v.make.name}}</td>
       <td>{{v.model.name}}</td>
       <td>{{v.contact.name}}</td>
       <td>
@@ -42,3 +39,4 @@
     </tr>
   </tbody>
 </table>
+<pagination [total-items]="10" [page-size]="filter.pageSize" (page-changed)="onPageChanged($event)"></pagination>

@@ -16,6 +16,7 @@ import { FeatureService } from './services/feature.service';
 import { VehicleService } from './services/vehicle.service';
 import { AppErrorHandler } from './app.error-handler';
 import { VehicleHomeComponent } from './vehicle-home/vehicle-home.component';
+import { PaginationComponent } from './shared/pagination.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { VehicleHomeComponent } from './vehicle-home/vehicle-home.component';
     CounterComponent,
     FetchDataComponent,
     VehicleFormComponent,
-    VehicleHomeComponent
+    VehicleHomeComponent,
+    PaginationComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),

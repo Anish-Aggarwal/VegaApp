@@ -17,7 +17,7 @@ export class VehicleHomeComponent implements OnInit {
   //   isSortAscending: false,
   //     sortBy: 'make'
   //   };
-  filter: any = {};
+  filter: any = {pageSize:3};
   columns = [
     { title: 'Id' },
     { title: 'Make', key: 'make', isSortable: true },
@@ -67,6 +67,11 @@ export class VehicleHomeComponent implements OnInit {
       this.filter.sortBy = columnName;
       this.filter.isSortAscending = true;
     }
+    this.populateVehicles();
+  }
+
+  onPageChanged(page){
+    this.filter.page = page;
     this.populateVehicles();
   }
 
