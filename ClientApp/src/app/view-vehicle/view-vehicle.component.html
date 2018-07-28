@@ -1,15 +1,15 @@
 <h1>Vehicle</h1>
 <div>
-   <!-- Nav tabs -->
+  <!-- Nav tabs -->
   <ul class="nav nav-tabs" role="tablist">
     <li role="presentation" [class.active]="isActive">
-      <a [routerLink]="['.']" fragment="basic"  aria-controls="basic" 
-      role="tab" data-toggle="tab">Vehicle</a></li>
+      <a [routerLink]="['.']" fragment="basic" aria-controls="basic" role="tab" data-toggle="tab">Vehicle</a>
+    </li>
     <li role="presentation" [class.active]="!isActive">
-      <a [routerLink]="['.']" fragment="photos" aria-controls="photos" 
-      role="tab" data-toggle="tab">Photos</a></li>
+      <a [routerLink]="['.']" fragment="photos" aria-controls="photos" role="tab" data-toggle="tab">Photos</a>
+    </li>
   </ul>
-   <!-- Tab panes -->
+  <!-- Tab panes -->
   <div class="tab-content" *ngIf="vehicle">
     <!-- Vehicle tab -->
     <div role="tabpanel" [class.active]="isActive" class="tab-pane active" id="basic">
@@ -39,8 +39,13 @@
     <!-- Photos tab -->
     <div role="tabpanel" class="tab-pane" [class.active]="!isActive" id="photos">
       <h2>Photos</h2>
-    <input type="file" (change)="onUpload()" #inputfile>
-    <img *ngFor="let photo of photos" src="/uploads/{{photo.fileName}}" class="img-thumbnail" >
+      <input type="file" (change)="onUpload()" #inputfile>
+      <div class="progress" *ngIf="loaded && loaded<100">
+        <div class="progress-bar" role="progressbar" [style.width]="loaded+'%'">
+          <span class="sr-only">{{loaded}}% Complete</span>
+        </div>
+      </div>
+      <img *ngFor="let photo of photos" src="/uploads/{{photo.fileName}}" class="img-thumbnail">
     </div>
   </div>
 </div>

@@ -4,7 +4,6 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { ToastyModule } from 'ng2-toasty';
-
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { HomeComponent } from './home/home.component';
@@ -49,7 +48,8 @@ import { PhotoService } from './services/photo.service';
     ])
   ],
   providers: [MakeService, FeatureService, PhotoService,
-    VehicleService, { provide: ErrorHandler, useClass: AppErrorHandler }],
+    VehicleService,
+    { provide: ErrorHandler, useClass: AppErrorHandler }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

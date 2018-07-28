@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '../../../node_modules/@angular/common/http';
+import { HttpClient, HttpRequest } from '../../../node_modules/@angular/common/http';
+
 
 @Injectable()
 export class PhotoService {
@@ -9,7 +10,11 @@ export class PhotoService {
   uploadPhotoforVehicle(vehicleId, file) {
     var formData = new FormData();
     formData.append('file', file);
-    return this.httpclient.post(`/api/vehicles/${vehicleId}/photos`, formData);
+    const httpRequest = new HttpRequest('POST',
+      `/api/vehicles/${vehicleId}/photos`,
+      formData, { reportProgress: true });
+
+    return this.httpclient.request(httpRequest);
   }
 
   getPhotos(vehicleid) {

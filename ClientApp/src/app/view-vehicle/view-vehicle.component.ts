@@ -1,9 +1,8 @@
-import { ToastyService } from 'ng2-toasty';
-
-import { Component, OnInit, ViewChild, ElementRef, NgZone } from '@angular/core';
-import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { VehicleService } from '../services/vehicle.service';
 import { PhotoService } from '../services/photo.service';
+import { HttpEventType } from '../../../node_modules/@angular/common/http';
 
 @Component({
   templateUrl: 'view-vehicle.component.html'
@@ -15,14 +14,13 @@ export class ViewVehicleComponent implements OnInit {
   @ViewChild('inputfile') inputFile: ElementRef;
   private fragment: string;
   photos: any[];
+  loaded: any;
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private toasty: ToastyService,
     private vehicleService: VehicleService,
-    private photoService: PhotoService,
-    private ngZone: NgZone) {
+    private photoService: PhotoService) {
 
 
     route.params.subscribe(p => {
@@ -72,8 +70,16 @@ export class ViewVehicleComponent implements OnInit {
   }
   onUpload() {
     var inputFileElement: HTMLInputElement = this.inputFile.nativeElement;
+
     this.photoService.uploadPhotoforVehicle(this.vehicleId, inputFileElement.files[0]).subscribe(
-      resp => this.photos.push(resp)
+      resp => {
+        if(resp.type===HttpEventType.UploadProgress){
+          this.loaded = Math.round(100 * resp.loaded / resp.total);
+        }
+        if(resp.type===HttpEventType.Response){
+          this.photos.push(resp.body)
+        }
+      }
     );
   }
 } 
