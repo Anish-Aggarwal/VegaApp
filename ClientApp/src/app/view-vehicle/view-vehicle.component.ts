@@ -14,6 +14,7 @@ export class ViewVehicleComponent implements OnInit {
   vehicleId: number;
   @ViewChild('inputfile') inputFile: ElementRef;
   private fragment: string;
+  photos: any[];
 
   constructor(
     private route: ActivatedRoute,
@@ -44,9 +45,14 @@ export class ViewVehicleComponent implements OnInit {
             return;
           }
         });
+
     this.route.fragment.subscribe(fragment => {
       this.fragment = fragment;
       this.showActiveTab();
+    });
+
+    this.photoService.getPhotos(this.vehicleId).subscribe(photos => {
+      this.photos = photos;
     });
   }
 
@@ -67,7 +73,7 @@ export class ViewVehicleComponent implements OnInit {
   onUpload() {
     var inputFileElement: HTMLInputElement = this.inputFile.nativeElement;
     this.photoService.uploadPhotoforVehicle(this.vehicleId, inputFileElement.files[0]).subscribe(
-      resp => console.log(resp)
+      resp => this.photos.push(resp)
     );
   }
 } 

@@ -39,7 +39,8 @@
     <!-- Photos tab -->
     <div role="tabpanel" class="tab-pane" [class.active]="!isActive" id="photos">
       <h2>Photos</h2>
-	  <input type="file" (change)="onUpload()" #inputfile>
+    <input type="file" (change)="onUpload()" #inputfile>
+    <img *ngFor="let photo of photos" src="/uploads/{{photo.fileName}}" class="img-thumbnail" >
     </div>
   </div>
 </div>

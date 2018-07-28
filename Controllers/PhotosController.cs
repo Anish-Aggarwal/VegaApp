@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -25,6 +26,17 @@ namespace VegaApp.Controllers
             this.unit = unit;
             this.repository = repository;
             this.host = host;
+        }
+        [HttpGet]
+        public async Task<IActionResult> GetPhotos(int vehicleId)
+        {
+            var photos = await this.repository.GetPhotos(vehicleId);
+            if (photos == null)
+            {
+                return NotFound();
+            }
+            
+            return Ok(this.mapper.Map<IEnumerable<Photo>, IEnumerable<PhotoResource>>(photos));
         }
         [HttpPost]
         public async Task<IActionResult> Upload(int vehicleId, IFormFile file)

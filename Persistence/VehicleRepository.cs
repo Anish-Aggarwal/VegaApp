@@ -17,6 +17,12 @@ namespace VegaApp.Persistence
         {
             this.context = context;
         }
+        public async Task<IEnumerable<Photo>> GetPhotos(int vehicleId)
+        {
+            return await
+            this.context.Photos.
+            Where(x => x.VehicleId == vehicleId).ToListAsync();
+        }
 
         public async Task<Vehicle> GetVehicle(int id, bool includeRelated = true)
         {

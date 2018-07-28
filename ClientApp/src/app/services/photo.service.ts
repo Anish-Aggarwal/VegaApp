@@ -11,4 +11,8 @@ export class PhotoService {
     formData.append('file', file);
     return this.httpclient.post(`/api/vehicles/${vehicleId}/photos`, formData);
   }
+
+  getPhotos(vehicleid) {
+    return this.httpclient.get<any[]>(`/api/vehicles/${vehicleid}/photos`);
+  }
 }
