@@ -1,6 +1,6 @@
 import { ToastyService } from 'ng2-toasty';
 
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, NgZone } from '@angular/core';
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { VehicleService } from '../services/vehicle.service';
 import { PhotoService } from '../services/photo.service';
@@ -10,6 +10,7 @@ import { PhotoService } from '../services/photo.service';
 })
 export class ViewVehicleComponent implements OnInit {
   vehicle: any;
+  isActive: boolean;
   vehicleId: number;
   @ViewChild('inputfile') inputFile: ElementRef;
   private fragment: string;
@@ -19,7 +20,8 @@ export class ViewVehicleComponent implements OnInit {
     private router: Router,
     private toasty: ToastyService,
     private vehicleService: VehicleService,
-    private photoService: PhotoService) {
+    private photoService: PhotoService,
+    private ngZone: NgZone) {
 
 
     route.params.subscribe(p => {
@@ -29,7 +31,7 @@ export class ViewVehicleComponent implements OnInit {
         return;
       }
     });
-    
+
   }
 
   ngOnInit() {
@@ -42,7 +44,24 @@ export class ViewVehicleComponent implements OnInit {
             return;
           }
         });
-    this.route.fragment.subscribe(fragment => { this.fragment = fragment; });
+    this.route.fragment.subscribe(fragment => {
+      this.fragment = fragment;
+      this.showActiveTab();
+    });
+  }
+
+  onClick() {
+    try {
+      console.log(this.fragment);
+      this.showActiveTab();
+    }
+    catch (e) { }
+  }
+
+  showActiveTab() {
+    if (this.fragment === "basic") {
+      this.isActive = true;
+    } else { this.isActive = false; }
   }
 
   delete() {
