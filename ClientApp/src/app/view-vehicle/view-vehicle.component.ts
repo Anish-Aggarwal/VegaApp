@@ -50,14 +50,6 @@ export class ViewVehicleComponent implements OnInit {
     });
   }
 
-  onClick() {
-    try {
-      console.log(this.fragment);
-      this.showActiveTab();
-    }
-    catch (e) { }
-  }
-
   showActiveTab() {
     if (this.fragment === "basic") {
       this.isActive = true;

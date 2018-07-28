@@ -2,10 +2,10 @@
 <div>
    <!-- Nav tabs -->
   <ul class="nav nav-tabs" role="tablist">
-    <li role="presentation" [class.active]="isActive" (click)="onClick()">
+    <li role="presentation" [class.active]="isActive">
       <a [routerLink]="['.']" fragment="basic"  aria-controls="basic" 
       role="tab" data-toggle="tab">Vehicle</a></li>
-    <li role="presentation" [class.active]="!isActive" (click)="onClick()">
+    <li role="presentation" [class.active]="!isActive">
       <a [routerLink]="['.']" fragment="photos" aria-controls="photos" 
       role="tab" data-toggle="tab">Photos</a></li>
   </ul>
