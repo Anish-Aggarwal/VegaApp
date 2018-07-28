@@ -9,7 +9,7 @@ export class VehicleService {
   constructor(private httpClient: HttpClient) { }
 
   createVehicle(vehicle) {
-    return this.httpClient.post(this.apiEndPoint, vehicle);
+    return this.httpClient.post<any>(this.apiEndPoint, vehicle);
   }
 
   getVehicle(id) {
@@ -17,7 +17,7 @@ export class VehicleService {
   }
 
   updateVehicle(vehicle) {
-    return this.httpClient.put(this.apiEndPoint+"/" + vehicle.id, vehicle);
+    return this.httpClient.put<any>(this.apiEndPoint+"/" + vehicle.id, vehicle);
   }
 
   deleteVehicle(id) {

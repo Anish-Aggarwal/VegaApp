@@ -9,6 +9,7 @@ namespace VegaApp.Mapping
     {
         public MappingProfile()
         {
+          CreateMap<Photo,PhotoResource>();
           CreateMap<VehicleQueryResource,VehicleQuery>();
             CreateMap<Make, MakeResource>();
             CreateMap<Make, KeyValuePairResource>();

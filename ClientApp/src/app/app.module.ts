@@ -17,6 +17,8 @@ import { VehicleService } from './services/vehicle.service';
 import { AppErrorHandler } from './app.error-handler';
 import { VehicleHomeComponent } from './vehicle-home/vehicle-home.component';
 import { PaginationComponent } from './shared/pagination.component';
+import { ViewVehicleComponent } from './view-vehicle/view-vehicle.component';
+import { PhotoService } from './services/photo.service';
 
 @NgModule({
   declarations: [
@@ -27,7 +29,8 @@ import { PaginationComponent } from './shared/pagination.component';
     FetchDataComponent,
     VehicleFormComponent,
     VehicleHomeComponent,
-    PaginationComponent
+    PaginationComponent,
+    ViewVehicleComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -35,15 +38,18 @@ import { PaginationComponent } from './shared/pagination.component';
     FormsModule,
     ToastyModule.forRoot(),
     RouterModule.forRoot([
-      { path: '',redirectTo:'vehicles', pathMatch: 'full' },
-      { path: 'vehicles', component: VehicleHomeComponent, pathMatch:'full' },
+      { path: '', redirectTo: 'vehicles', pathMatch: 'full' },
       { path: 'vehicles/new', component: VehicleFormComponent },
-      { path: 'vehicles/:id', component: VehicleFormComponent },
+      { path: 'vehicles/edit/:id', component: VehicleFormComponent },
+      { path: 'vehicles/:id', component: ViewVehicleComponent },
+      { path: 'vehicles', component: VehicleHomeComponent },
       { path: 'counter', component: CounterComponent },
       { path: 'fetch-data', component: FetchDataComponent },
+      { path: '**', redirectTo: 'home' }
     ])
   ],
-  providers: [MakeService, FeatureService, VehicleService, { provide: ErrorHandler, useClass: AppErrorHandler }],
+  providers: [MakeService, FeatureService, PhotoService,
+    VehicleService, { provide: ErrorHandler, useClass: AppErrorHandler }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
